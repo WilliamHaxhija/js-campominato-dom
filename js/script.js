@@ -1,11 +1,14 @@
 //Seleziono gli elementi dal DOM
 const grid = document.querySelector('.ms-grid');
 const playButton = document.querySelector('.ms-play');
+//Inizializzo una variabile per comunicare il punteggio
+const counterUpdatesMessage = document.querySelector('.ms-counter');
 //Creo l'evento per iniziare il gioco
 playButton.addEventListener('click', function () {
     grid.classList.remove('d-none');
     grid.style.display = ('flex');
-    // Svuoto la griglia quando viene creato un nuovo gioco
+    // Svuoto la griglia e azzero il punteggio quando viene creato un nuovo gioco se non è il primo try
+    counterUpdatesMessage.innerHTML = '';
     grid.innerHTML = '';
     //Inserisco le logiche per il livello di difficoltà
     const level = document.querySelector('#level').value;
@@ -23,7 +26,7 @@ playButton.addEventListener('click', function () {
     }
     //Creo array per le bombe
     const bombsArray = [];
-    //Genero 16 numeri random nell'array e controllo che non ci siano numeri uguali nell'array (con una funzione){
+    //Genero 16 numeri random nell'array e controllo che non ci siano numeri uguali nell'array (con una funzione)
     const randomNumber = getArrayRandomUniqueNumber(bombsArray, 16, numberOfSquares);
     //Creo le celle
     let square;
@@ -33,30 +36,36 @@ playButton.addEventListener('click', function () {
         grid.append(square);
     }
     console.log(bombsArray);
+    //creo un array vuoto all'interno del quale inserirò tutti i numeri non bomba
     const notBombsArray = [];
+    //Inizializzo una variabile per tenere conto del punteggio
+    let counter = 0;
     //Passo in rassegna tutte le celle
     const allSquares = document.querySelectorAll('.ms-cell');
     for (let i = 0; i < allSquares.length; i++) {
         const thisSquare = allSquares[i];
         //Per ogni cella, creo un evento per interagirci
         thisSquare.addEventListener('click', function () {
-            //creo un array vuoto all'inteerno del quale inserirò tutti i numeri non bomba
             //Se è una bomba la partita finisce
-           if (bombsArray.includes((parseInt(thisSquare.innerHTML)))) {
-              this.classList.add('red');
-              alert('Game Over');
-              grid.innerHTML = '';
-              //Altrimenti la partita continua finchè tutti i numeri non bomba sono stati rivelati
-           } else {
-              this.classList.add('lightblue');
-              notBombsArray.push((parseInt(thisSquare.innerHTML)));
-           }
-           if (notBombsArray.length === (numberOfSquares - bombsArray.length)) {
-              alert('You Win!');
-           }
-           console.log(notBombsArray.length);
-           console.log(numberOfSquares);
-           console.log(bombsArray.length);
+            if (bombsArray.includes((parseInt(thisSquare.innerHTML)))) {
+               this.classList.add('red');
+               setTimeout(function () {
+                  alert('You selected the square ' + thisSquare.innerHTML + '! ' + 'Game Over.');
+               }, 500);
+               counterUpdatesMessage.innerHTML = '';
+               grid.innerHTML = '';
+               //Altrimenti la partita continua finchè tutti i numeri non bomba sono stati rivelati
+            } else {
+               this.classList.add('lightblue');
+               notBombsArray.push((parseInt(thisSquare.innerHTML)));
+               counter++;
+            }
+            if (notBombsArray.length === (numberOfSquares - bombsArray.length)) {
+               alert('You Win!');
+               counterUpdatesMessage.innerHTML = '';
+               grid.innerHTML = '';
+            }
+            counterUpdatesMessage.innerHTML ='Score: ' + counter;
         });
     }
 });
@@ -92,7 +101,7 @@ function getArrayRandomUniqueNumber(array, iterations, number) {
 //Funzione che genera un numero casuale tra min e max
 //min => numero intero
 //max => numero intero
-//Return => numero trandom tra min e max
+//Return => numero random tra min e max
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }

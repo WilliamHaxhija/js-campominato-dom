@@ -33,6 +33,12 @@ main {
     height: 100%;
 }
 
+.ms-counter {
+    color: rgb(188, 58, 11);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
 .ms-grid {
     flex-wrap: wrap;
     width: 600px;
