@@ -48,8 +48,7 @@ playButton.addEventListener('click', function () {
             if (bombsArray.includes((parseInt(thisSquare.innerHTML)))) {
                this.classList.add('red');
                setTimeout(function () {
-                  alert('You selected the square ' + thisSquare.innerHTML + '! ' + 'Game Over.');
-                  counterUpdatesMessage.innerHTML = '';
+                  alert('You picked a Bomb! Game Over.');
                   grid.innerHTML = '';
                }, 300);
                
@@ -61,7 +60,6 @@ playButton.addEventListener('click', function () {
             }
             if (notBombsArray.length === (numberOfSquares - bombsArray.length)) {
                alert('You Win!');
-               counterUpdatesMessage.innerHTML = '';
                grid.innerHTML = '';
             }
             counterUpdatesMessage.innerHTML ='Score: ' + counter;
