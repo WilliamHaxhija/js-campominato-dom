@@ -50,7 +50,7 @@ playButton.addEventListener('click', function () {
                setTimeout(function () {
                   alert('You picked a Bomb! Game Over.');
                   grid.innerHTML = '';
-               }, 300);
+               }, 100);
                
                //Altrimenti la partita continua finchè tutti i numeri non bomba sono stati rivelati
             } else {

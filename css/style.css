@@ -72,3 +72,20 @@ main {
 footer p {
     margin: 0 1rem;
 }
+
+/*-------------
+      M Q
+-------------*/
+
+@media screen and (max-width: 768px) {
+    .ms-grid {
+        width: 350px;
+        height: 350px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    main {
+        height: calc(100vh - 112px - 56px);
+    }
+}
