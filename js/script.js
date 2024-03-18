@@ -1,5 +1,7 @@
+//Seleziono gli elementi dal DOM
 const grid = document.querySelector('.ms-grid');
 const playButton = document.querySelector('.ms-play');
+//Creo l'evento per iniziare il gioco
 playButton.addEventListener('click', function () {
     grid.classList.remove('d-none');
     grid.style.display = ('flex');
@@ -19,15 +21,17 @@ playButton.addEventListener('click', function () {
         numberOfSquares = 49;
         numberOfCellsPerRow = 7
     }
-
+    //Creo le celle
     for (let i = 1; i <= numberOfSquares; i++) {
         const thisNumber = i;
         const square = generateSquare(i, numberOfCellsPerRow);
         grid.append(square);
     }
+    //Passo in rassegna tutte le celle
     const allSquares = document.querySelectorAll('.ms-cell');
     for (let i = 0; i < allSquares.length; i++) {
         const thisSquare = allSquares[i];
+        //Per ogni cella, creo un evento per interagirci
         thisSquare.addEventListener('click', function () {
             this.classList.add('lightblue');
             console.log(this.textContent);
@@ -35,7 +39,12 @@ playButton.addEventListener('click', function () {
     }
 });
 
-// Functions
+//FUNCTIONS
+
+//Funzione che genera celle (adattate in base al livello di difficoltà selezionato)
+//number => il numero all'interno della cella
+//cellsPerRow => il numero di celle per riga in base alla difficoltà selezionata
+//Return => un elemento del DOM (le celle della griglia)
 function generateSquare(number, cellsPerRow) {
     const newSquare = document.createElement('div');
     newSquare.classList.add('ms-cell');
