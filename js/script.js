@@ -10,7 +10,7 @@ playButton.addEventListener('click', function () {
     //Inserisco le logiche per il livello di difficoltà
     const level = document.querySelector('#level').value;
     //Definisco numberOfSquares con scope globale per leggerlo nella funzione getArrayRandomUniqueNumber
-    numberOfSquares = 0;
+     let numberOfSquares;
     let numberOfCellsPerRow;
     if (level === 'easy') {
         numberOfSquares = 100;
@@ -25,7 +25,7 @@ playButton.addEventListener('click', function () {
     //Creo array per le bombe
     const bombsArray = [];
     //Genero 16 numeri random nell'array e controllo che non ci siano numeri uguali nell'array (con una funzione){
-    const randomNumber = getArrayRandomUniqueNumber(bombsArray, 16);
+    const randomNumber = getArrayRandomUniqueNumber(bombsArray, 16, numberOfSquares);
     console.log(bombsArray);
     //Creo le celle
     let square;
@@ -43,6 +43,7 @@ playButton.addEventListener('click', function () {
         thisSquare.addEventListener('click', function () {
            if (bombsArray.includes((parseInt(thisSquare.innerHTML)))) {
             this.classList.add('red');
+            alert('Game Over');
            } else {
             this.classList.add('lightblue');
            }
@@ -68,9 +69,10 @@ function generateSquare(number, cellsPerRow) {
 //Funzione che genera numeri random compresi tra 1 e 100 in array pre-esistente
 //array => l'array all'interno del quale pushare i numeri
 //iterations => un numero intero che indica il numero di iterazioni del ciclo while
-function getArrayRandomUniqueNumber(array, iterations) {
+//number => un numero intero
+function getArrayRandomUniqueNumber(array, iterations, number) {
     while (array.length < iterations) {
-        let randomNumber = getRndInteger(1, numberOfSquares);
+        let randomNumber = getRndInteger(1, number);
         if (!array.includes(randomNumber)) {
             array.push(randomNumber);
         }
