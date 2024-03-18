@@ -9,7 +9,6 @@ playButton.addEventListener('click', function () {
     grid.style.display = ('flex');
     // Svuoto la griglia e azzero il punteggio quando viene creato un nuovo gioco se non è il primo try
     counterUpdatesMessage.innerHTML = '';
-    grid.innerHTML = '';
     //Inserisco le logiche per il livello di difficoltà
     const level = document.querySelector('#level').value;
     let numberOfSquares;
@@ -35,7 +34,6 @@ playButton.addEventListener('click', function () {
         square = generateSquare(i, numberOfCellsPerRow);
         grid.append(square);
     }
-    console.log(bombsArray);
     //creo un array vuoto all'interno del quale inserirò tutti i numeri non bomba
     const notBombsArray = [];
     //Inizializzo una variabile per tenere conto del punteggio
@@ -51,9 +49,10 @@ playButton.addEventListener('click', function () {
                this.classList.add('red');
                setTimeout(function () {
                   alert('You selected the square ' + thisSquare.innerHTML + '! ' + 'Game Over.');
-               }, 500);
-               counterUpdatesMessage.innerHTML = '';
-               grid.innerHTML = '';
+                  counterUpdatesMessage.innerHTML = '';
+                  grid.innerHTML = '';
+               }, 300);
+               
                //Altrimenti la partita continua finchè tutti i numeri non bomba sono stati rivelati
             } else {
                this.classList.add('lightblue');
