@@ -1,0 +1,64 @@
+/*-------------
+    HEADER
+-------------*/
+
+#logo {
+    max-width: 3.5rem;
+}
+
+select {
+    width: 45%;
+}
+
+header button,
+header select {
+    border: 1px solid lightgrey !important;
+}
+
+.btn {
+    margin-left: 0.4rem;
+}
+
+/*-------------
+     MAIN
+-------------*/
+
+main {
+    height: calc(100vh - 88px - 56px);
+    background-color: #7fffd4;
+    overflow-y: auto;
+}
+
+.ms-grid-ctn {
+    height: 100%;
+}
+
+.ms-grid {
+    flex-wrap: wrap;
+    width: 600px;
+    height: 600px;
+}
+
+.ms-cell {
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+    border: 1px solid lightgrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.lightblue {
+    background-color: lightblue;
+}
+
+/*-------------
+    FOOTER
+-------------*/
+
+footer p {
+    margin: 0 1rem;
+}
