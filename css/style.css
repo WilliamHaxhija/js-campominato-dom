@@ -37,7 +37,6 @@ main {
     flex-wrap: wrap;
     width: 600px;
     height: 600px;
-    border: 1px solid rgb(183, 174, 174);
 }
 
 .ms-cell {
@@ -54,6 +53,10 @@ main {
 
 .lightblue {
     background-color: lightblue;
+}
+
+.red {
+    background-color: coral;
 }
 
 /*-------------
