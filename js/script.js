@@ -9,8 +9,7 @@ playButton.addEventListener('click', function () {
     grid.innerHTML = '';
     //Inserisco le logiche per il livello di difficoltà
     const level = document.querySelector('#level').value;
-    //Definisco numberOfSquares con scope globale per leggerlo nella funzione getArrayRandomUniqueNumber
-     let numberOfSquares;
+    let numberOfSquares;
     let numberOfCellsPerRow;
     if (level === 'easy') {
         numberOfSquares = 100;
@@ -26,7 +25,6 @@ playButton.addEventListener('click', function () {
     const bombsArray = [];
     //Genero 16 numeri random nell'array e controllo che non ci siano numeri uguali nell'array (con una funzione){
     const randomNumber = getArrayRandomUniqueNumber(bombsArray, 16, numberOfSquares);
-    console.log(bombsArray);
     //Creo le celle
     let square;
     for (let i = 1; i <= numberOfSquares; i++) {
@@ -34,19 +32,31 @@ playButton.addEventListener('click', function () {
         square = generateSquare(i, numberOfCellsPerRow);
         grid.append(square);
     }
+    console.log(bombsArray);
+    const notBombsArray = [];
     //Passo in rassegna tutte le celle
     const allSquares = document.querySelectorAll('.ms-cell');
     for (let i = 0; i < allSquares.length; i++) {
         const thisSquare = allSquares[i];
-        console.log(thisSquare.innerHTML);
         //Per ogni cella, creo un evento per interagirci
         thisSquare.addEventListener('click', function () {
+            //creo un array vuoto all'inteerno del quale inserirò tutti i numeri non bomba
+            //Se è una bomba la partita finisce
            if (bombsArray.includes((parseInt(thisSquare.innerHTML)))) {
-            this.classList.add('red');
-            alert('Game Over');
+              this.classList.add('red');
+              alert('Game Over');
+              grid.innerHTML = '';
+              //Altrimenti la partita continua finchè tutti i numeri non bomba sono stati rivelati
            } else {
-            this.classList.add('lightblue');
+              this.classList.add('lightblue');
+              notBombsArray.push((parseInt(thisSquare.innerHTML)));
            }
+           if (notBombsArray.length === (numberOfSquares - bombsArray.length)) {
+              alert('You Win!');
+           }
+           console.log(notBombsArray.length);
+           console.log(numberOfSquares);
+           console.log(bombsArray.length);
         });
     }
 });
