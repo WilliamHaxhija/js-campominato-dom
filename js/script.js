@@ -9,7 +9,8 @@ playButton.addEventListener('click', function () {
     grid.innerHTML = '';
     //Inserisco le logiche per il livello di difficoltà
     const level = document.querySelector('#level').value;
-    let numberOfSquares;
+    //Definisco numberOfSquares con scope globale per leggerlo nella funzione getArrayRandomUniqueNumber
+    numberOfSquares = 0;
     let numberOfCellsPerRow;
     if (level === 'easy') {
         numberOfSquares = 100;
@@ -69,9 +70,17 @@ function generateSquare(number, cellsPerRow) {
 //iterations => un numero intero che indica il numero di iterazioni del ciclo while
 function getArrayRandomUniqueNumber(array, iterations) {
     while (array.length < iterations) {
-        let randomNumber = Math.floor(Math.random() * 100) + 1;
+        let randomNumber = getRndInteger(1, numberOfSquares);
         if (!array.includes(randomNumber)) {
             array.push(randomNumber);
         }
     }
+}
+
+//Funzione che genera un numero casuale tra min e max
+//min => numero intero
+//max => numero intero
+//Return => numero trandom tra min e max
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
