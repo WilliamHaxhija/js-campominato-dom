@@ -37,12 +37,13 @@ main {
     flex-wrap: wrap;
     width: 600px;
     height: 600px;
+    border: 1px solid rgb(183, 174, 174);
 }
 
 .ms-cell {
     width: calc(100% / 10);
     height: calc(100% / 10);
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(183, 174, 174);
     display: flex;
     justify-content: center;
     align-items: center;

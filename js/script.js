@@ -29,7 +29,7 @@ playButton.addEventListener('click', function () {
     for (let i = 0; i < allSquares.length; i++) {
         const thisSquare = allSquares[i];
         thisSquare.addEventListener('click', function () {
-            this.classList.toggle('lightblue');
+            this.classList.add('lightblue');
             console.log(this.textContent);
         });
     }
